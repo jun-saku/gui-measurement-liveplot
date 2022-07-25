@@ -55,7 +55,7 @@ layout = [[sg.Canvas(key='figCanvas', background_color='white'),
            sg.Button('Close', font=AppFont),
            sg.Button('Save', font=AppFont)]]
 
-_VARS['window'] = sg.Window('River Level Sensor GUI',
+_VARS['window'] = sg.Window('Sensor GUI',
                             layout,
                             finalize=True,
                             resizable=True,
