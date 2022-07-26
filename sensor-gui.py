@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 from datetime import datetime
-import matplotlib.animation as anim
+import os
 
 _VARS = {'window': False,
          'fig_agg': False,
@@ -55,7 +55,7 @@ layout = [[sg.Canvas(key='figCanvas', background_color='white'),
            sg.Button('Close', font=AppFont),
            sg.Button('Save', font=AppFont)]]
 
-_VARS['window'] = sg.Window('Sensor GUI',
+_VARS['window'] = sg.Window('River Level Sensor GUI',
                             layout,
                             finalize=True,
                             resizable=True,
@@ -105,6 +105,8 @@ while True:
     if event == 'Save':
         df = pd.DataFrame(measurement_array, columns=headings)
         time_stamp = datetime.now()
+        if not os.path.exists('data_dummy'):
+            os.makedirs('data_dummy')
         file_path = 'data_dummy/' + time_stamp.strftime('%m-%d-%Y_%H-%M-%S-%f')[:-3] + '.csv'
         df.to_csv(file_path)
         sg.Popup('File Saved to path: ' + file_path)
